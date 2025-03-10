@@ -1,4 +1,5 @@
 "use client"
+
 import { Cat, FileText, Github, Linkedin } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
