@@ -1,11 +1,15 @@
 "use client"
 
-import { Cat, FileText, Github, Linkedin } from "lucide-react";
+import { Cat, Facebook, FileText, Github, Instagram, Linkedin, Twitter } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function Home() {
 
+  const router = useRouter();
+  const routeToPage = (url: string) => { router.push(url) };
   const theme = () => {
     const theme = document.getElementsByTagName("body")[0];
     if (theme.getAttribute("data-theme") === "lofi") {
@@ -14,6 +18,8 @@ export default function Home() {
       theme.setAttribute("data-theme", "lofi");
     }
   }
+  const [currentYear] = useState(new Date().getFullYear());
+
 
   // const Project = ({ title, description, image}) => {
   //   return(
@@ -62,17 +68,17 @@ export default function Home() {
               <div className="swap-off">MM</div>
             </label>
           </div>
-          <div className="card card-side grow py-4">
+          <div className="card card-side grow pt-4">
             <figure className="size-32 rounded-md">
               <img src="/picture.jpg" alt="Yion" />
             </figure>
             <div className="card-body w-1/2 px-4 py-0">
               <div className="card-title">Hi, My name is Yion</div>
-              <p className="text-xs">Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati expedita doloremque quia eos at? Sunt.</p>
+              <p className="text-xs lg:text-lg">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto repellat perferendis, illo mollitia fuga reprehenderit.</p>
               <div className="flex items-center justify-end">
-                <a href="#" className="btn btn-ghost size-8 p-0 border"><FileText strokeWidth={1} /></a>
-                <a href="#" className="btn btn-ghost size-8 p-0 border"><Github strokeWidth={1} /></a>
-                <a href="#" className="btn btn-ghost size-8 p-0 border"><Linkedin strokeWidth={1} /></a>
+                <a onClick={()=>routeToPage("/resume")} title="resume" className="btn btn-ghost size-8 p-0 border"><FileText strokeWidth={1} /></a>
+                <a href="https://github.com/yion69" rel="noopener" target="_blank" title="github/yion69" className="btn btn-ghost size-8 p-0 border"><Github strokeWidth={1} /></a>
+                <a href="https://www.linkedin.com/in/thu-ta-naing-83b5222b0/" rel="noopener" target="_blank" title="linkedin/thu_ta_naing" className="btn btn-ghost size-8 p-0 border"><Linkedin strokeWidth={1} /></a>
               </div>
             </div>
           </div>
@@ -104,7 +110,7 @@ export default function Home() {
           <h3 className="text-xl font-semibold">Technologies</h3>
           <div className="card">
             <div className="card-body flex flex-col lg:flex-row lg:gap-24 h-fit p-0">
-              <div className="flex flex-col lg:gap-4">
+              <div className="flex flex-col gap-2 lg:gap-4">
                 <h4 className="card-title">Languages</h4>
                 <div className="h-fit grid grid-flow-col justify-start gap-5">
                   <span className="flex flex-col items-center justify-center box-border">
@@ -129,7 +135,7 @@ export default function Home() {
                   </span>
                 </div>
               </div>
-              <div className="flex flex-col lg:gap-4">
+              <div className="flex flex-col gap-2 lg:gap-4">
                 <h4 className="card-title">Frameworks</h4>
                 <div className="h-fit grid grid-flow-col justify-start gap-5">
                   <span className="flex flex-col items-center justify-center box-border">
@@ -247,7 +253,31 @@ export default function Home() {
           </Swiper>
         </div>
 
-        <div className="divider"></div>
+        <div className="divider mb-0 pb-0"></div>
+
+        <div className="flex flex-col lg:flex-row w-full h-fit pt-2 pb-4 ">
+          <div className="flex justify-center lg:justify-start items-center w-full lg:w-1/2 h-fit">
+            <h3 className="text-lg font-semibold">Socials •</h3>
+            <ul className="grid grid-cols-4 gap-2">
+              <li>
+                <a href="#" className="hover:translate-y-1"><Facebook size={22} strokeWidth={1} className="hover:-translate-y-1 transition-all hover:fill-accent" /></a>
+              </li>
+              <li>
+                <a href="#">
+                  <Instagram size={22} strokeWidth={1} className="hover:-translate-y-1 transition-all hover:fill-accent"/>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <Twitter size={22} strokeWidth={1} className="hover:-translate-y-1 transition-all hover:fill-accent" />
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div className="flex items-center justify-center lg:justify-end w-full lg:w-1/2">
+            <p className="">&copy; <span>{currentYear}</span> Yion ‣ All rights reserved.</p>
+          </div>
+        </div>
       </div>
     </div>
   );
