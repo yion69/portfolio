@@ -30,12 +30,12 @@ export default function Home() {
   // }
 
   return (
-    <div className="w-screen h-fit flex justify-center font-['Doris'] overflow-y-scroll">
+    <div className="w-screen h-fit flex justify-center font-['DailyMoody'] overflow-y-scroll">
       <div className="flex flex-col px-4 w-full md:w-1/2 lg:w-1/2">
         <nav className="flex items-center w-full h-20 text-2xl box-border">
           <div className="flex items-center gap-2">
             <Cat />
-            <h1 className="font-mono font-semibold">Yion.dev</h1>
+            <h1 className="font-['CuteNotes'] font-semibold text-3xl">Yion.dev</h1>
           </div>
         </nav>
         <div className="flex flex-col w-full h-fit gap-2">
@@ -240,8 +240,8 @@ export default function Home() {
                       src="/image.png"
                       alt="Shoes" />
                   </div>
-                  <div className="flex items-center justify-around w-full h-1/4 p-2 border-t border-secondary">
-                    <h3 className=" p-0">Restruant Website</h3>
+                  <div className="flex items-center justify-around w-full h-1/4 p-2 border-t border-secondary font-['Doris'] ">
+                    <h3 className="font-['Doris'] p-0">Restruant Website</h3>
                     <div className="flex grow gap-1 justify-end">
                       <span className="badge badge-sm rounded-full bg-secondary text-secondary-content">PHP</span>
                       <span className="badge badge-sm rounded-full bg-secondary text-secondary-content">Tailwind</span>
@@ -255,7 +255,7 @@ export default function Home() {
 
         <div className="divider mb-0 pb-0"></div>
 
-        <div className="flex flex-col lg:flex-row w-full h-fit pt-2 pb-4 ">
+        <div className="flex flex-col lg:flex-row w-full h-fit pt-2 pb-4">
           <div className="flex justify-center lg:justify-start items-center w-full lg:w-1/2 h-fit">
             <h3 className="text-lg font-semibold">Socials •</h3>
             <ul className="grid grid-cols-4 gap-2">

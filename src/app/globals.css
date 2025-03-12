@@ -7,7 +7,27 @@
   font-family: 'Akira';
   src: url('/Akira.otf');
 }
-@font-face {
+@font-face {  
   font-family: 'Doris';
   src: url('/Doris.ttf');
+}
+
+@font-face {
+  font-family: 'CuteNotes';
+  src: url('/fonts/Cute Notes.ttf');
+}
+
+@font-face {
+  font-family: "RobotoCondensed";
+  src: url("/fonts/RobotoCondensed.ttf");
+}
+
+@font-face {
+  font-family: "NoteBook";
+  src: url("/fonts/Notebook.otf");
+}
+
+@font-face {
+  font-family: "DailyMoody";
+  src: url("/fonts/Daily Moody.otf");
 }
