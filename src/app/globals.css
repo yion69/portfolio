@@ -4,15 +4,6 @@
 }
 
 @font-face {
-  font-family: 'Akira';
-  src: url('/Akira.otf');
-}
-@font-face {  
-  font-family: 'Doris';
-  src: url('/Doris.ttf');
-}
-
-@font-face {
   font-family: 'CuteNotes';
   src: url('/fonts/Cute Notes.ttf');
 }

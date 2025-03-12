@@ -1,10 +1,12 @@
 "use client"
 
-import { Cat, Facebook, FileText, Github, Instagram, Linkedin, Twitter } from "lucide-react";
+import { Cat, Facebook, FileText, Github, Instagram, Linkedin, Twitter, Volume2, VolumeOff } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import AudioPlayer from 'react-h5-audio-player';
+import 'react-h5-audio-player/lib/styles.css';
 
 export default function Home() {
 
@@ -25,9 +27,34 @@ export default function Home() {
     { project_name: "Persona", project_img: "/projects/project-3.png", project_stack: "React.js"},
     { project_name: "KBZPay Clone", project_img: "/projects/project-4.png", project_stack: "React.js"},
   ]);
+  
+  const audioRef = useRef(null);
+  const [mute, setMute] = useState(false);
+  const toggleMute = () => {
+    if (audioRef.current) {
+      const audioElement = audioRef.current as any;
+      console.log(audioElement.audio!.current.muted);
+      audioElement.audio.current.muted = !audioElement.audio.current.muted; // Toggle mute
+    }
+  }
+
+  useEffect(()=> {
+    console.log(`mute = ${mute}`);
+  }, [mute])
 
   return (
-    <div className="w-screen h-fit flex justify-center font-['DailyMoody'] overflow-y-scroll">
+    <div className="relative w-screen h-fit flex justify-center font-['DailyMoody'] overflow-y-scroll">
+      <div className="fixed left-0 bottom-2 w-1/4 h-fit hidden lg:visible">
+        <AudioPlayer
+          ref={audioRef}
+          loop
+          autoPlay
+          muted={mute}
+          src="/music/1-12. Dry Hands.mp3"
+          volume={0.5}
+          onPlay={e => console.log("onPlay")}
+          style={{ backgroundColor: "transparent"}} />
+      </div>
       <div className="flex flex-col px-4 w-full md:w-1/2 lg:w-1/2">
         <nav className="flex items-center w-full h-20 text-2xl box-border">
           <div className="flex items-center gap-2">
@@ -60,9 +87,9 @@ export default function Home() {
             </label>
             <div className="divider divider-horizontal"></div>
             <label className="swap text-xl">
-              <input type="checkbox" />
-              <div className="swap-on">EN</div>
-              <div className="swap-off">MM</div>
+              <input type="checkbox" title="audio" onChange={toggleMute} />
+              <div className="swap-on"><VolumeOff /></div>
+              <div className="swap-off"><Volume2 /></div>
             </label>
           </div>
           <div className="card card-side grow pt-4">
