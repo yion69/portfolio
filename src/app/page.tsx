@@ -19,15 +19,12 @@ export default function Home() {
     }
   }
   const [currentYear] = useState(new Date().getFullYear());
-
-
-  // const Project = ({ title, description, image}) => {
-  //   return(
-  //     <div className="w-full h-full">
-
-  //     </div>
-  //   )
-  // }
+  const [projects, setProjects] = useState([
+    { project_name: "Spaces", project_img: "/projects/project-1.png", project_stack: "NEXT.js"},
+    { project_name: "Restaurant Demo", project_img: "/projects/project-2.png", project_stack: "PHP"},
+    { project_name: "Persona", project_img: "/projects/project-3.png", project_stack: "React.js"},
+    { project_name: "KBZPay Clone", project_img: "/projects/project-4.png", project_stack: "React.js"},
+  ]);
 
   return (
     <div className="w-screen h-fit flex justify-center font-['DailyMoody'] overflow-y-scroll">
@@ -212,7 +209,7 @@ export default function Home() {
 
         <div className="divider"></div>
 
-        <div className="flex flex-col w-full h-48 gap-2">
+        <div className="flex flex-col w-full h-56 gap-2">
           <h3 className="text-xl font-semibold">Projects</h3>
           <Swiper
             className="w-full grow"
@@ -223,28 +220,27 @@ export default function Home() {
                 slidesPerView: 1,
               },
               400:{
-                slidesPerView:2,
+                slidesPerView:1,
               },
               639: {
-                slidesPerView: 3,
+                slidesPerView: 2,
               },
             }}
             onSlideChange={() => console.log('slide change')}
             onSwiper={(swiper: any) => console.log(swiper)}
           >
             {
-              [...Array(6)].map((_,i) => (
+              projects.map((e,i) => (
                 <SwiperSlide className="flex flex-col w-full h-full border border-secondary rounded-md overflow-hidden">
                   <div className="w-full h-3/4 bg-blue-400 overflow-hidden">
                     <img
-                      src="/image.png"
+                      src= {e.project_img}
                       alt="Shoes" />
                   </div>
-                  <div className="flex items-center justify-around w-full h-1/4 p-2 border-t border-secondary font-['Doris'] ">
-                    <h3 className="font-['Doris'] p-0">Restruant Website</h3>
-                    <div className="flex grow gap-1 justify-end">
-                      <span className="badge badge-sm rounded-full bg-secondary text-secondary-content">PHP</span>
-                      <span className="badge badge-sm rounded-full bg-secondary text-secondary-content">Tailwind</span>
+                  <div className="flex items-center justify-around w-full h-1/4 px-4 py-2 border-t border-secondary font-['Doris'] ">
+                    <h3 className="font-['Doris'] p-0 w-full h-full">{e.project_name}</h3>
+                    <div className="flex w-fit h-full items-center grow gap-1 justify-end">
+                      <span className="badge badge-sm rounded-full bg-secondary text-secondary-content">{e.project_stack}</span>
                     </div>
                   </div>
                 </SwiperSlide>
