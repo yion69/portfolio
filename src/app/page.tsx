@@ -44,16 +44,19 @@ export default function Home() {
 
   return (
     <div className="relative w-screen h-fit flex justify-center font-['DailyMoody'] overflow-y-scroll">
-      <div className="fixed left-0 bottom-2 w-1/4 h-fit hidden lg:visible">
+      <div className="fixed left-1 bottom-2 w-1/4 h-fit hidden lg:hidden border border-secondary rounded-md">
         <AudioPlayer
           ref={audioRef}
           loop
           autoPlay
           muted={mute}
           src="/music/1-12. Dry Hands.mp3"
-          volume={0.5}
+          volume={0.3}
+          header="Now Playing : Mice on Venus"
+          showSkipControls={false}
+          showJumpControls={false}
           onPlay={e => console.log("onPlay")}
-          style={{ backgroundColor: "transparent"}} />
+          style={{ backgroundColor: "transparent", border: "none"}} />
       </div>
       <div className="flex flex-col px-4 w-full md:w-1/2 lg:w-1/2">
         <nav className="flex items-center w-full h-20 text-2xl box-border">
@@ -98,7 +101,7 @@ export default function Home() {
             </figure>
             <div className="card-body w-1/2 px-4 py-0">
               <div className="card-title">Hi, My name is Yion</div>
-              <p className="text-xs lg:text-lg">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto repellat perferendis, illo mollitia fuga reprehenderit.</p>
+              <p className="text-xs lg:text-lg">Full-Stack Developer in Chiang Mai, building fast, responsive web apps with React, Next.js, and scalable backends.</p>
               <div className="flex items-center justify-end">
                 <a onClick={()=>routeToPage("/resume")} title="resume" className="btn btn-ghost size-8 p-0 border"><FileText strokeWidth={1} /></a>
                 <a href="https://github.com/yion69" rel="noopener" target="_blank" title="github/yion69" className="btn btn-ghost size-8 p-0 border"><Github strokeWidth={1} /></a>
@@ -117,11 +120,11 @@ export default function Home() {
               <div className="flex flex-col gap-2">
                 <div className="flex flex-col">
                   <h4 className="font-semibold">Web Development</h4>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati nisi omnis incidunt assumenda delectus suscipit eius, labore doloremque quisquam sed!</p>
+                  <p>I build modern, high-performance websites using modern techs like Next.js, Tailwind and handle server-side tasks like API routes, database queries, and optimizations.</p>
                 </div>
                 <div className="flex flex-col">
                   <h4 className="font-semibold">Software Development</h4>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati nisi omnis incidunt assumenda delectus suscipit eius, labore doloremque quisquam sed!</p>
+                  <p>I have experience in developing management software with C# and Java, focusing on efficiency, scalability, and user-friendly interfaces during my college year.</p>
                 </div>
               </div>
             </div>
@@ -264,8 +267,8 @@ export default function Home() {
                       src= {e.project_img}
                       alt="Shoes" />
                   </div>
-                  <div className="flex items-center justify-around w-full h-1/4 px-4 py-2 border-t border-secondary font-['Doris'] ">
-                    <h3 className="font-['Doris'] p-0 w-full h-full">{e.project_name}</h3>
+                  <div className="flex items-center justify-around w-full h-1/4 px-4 py-2 border-t border-secondary font-mono ">
+                    <h3 className=" p-0 w-full h-full">{e.project_name}</h3>
                     <div className="flex w-fit h-full items-center grow gap-1 justify-end">
                       <span className="badge badge-sm rounded-full bg-secondary text-secondary-content">{e.project_stack}</span>
                     </div>
