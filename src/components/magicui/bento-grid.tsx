@@ -13,7 +13,6 @@ interface BentoCardProps extends ComponentPropsWithoutRef<"div"> {
   name: string;
   className: string;
   background: ReactNode;
-  Icon: React.ElementType;
   description: string;
   href: string;
   cta: string;
@@ -37,7 +36,6 @@ const BentoCard = ({
   name,
   className,
   background,
-  Icon,
   description,
   href,
   cta,
@@ -46,7 +44,7 @@ const BentoCard = ({
   <div
     key={name}
     className={cn(
-      "group relative col-span-3 flex flex-col justify-between overflow-hidden rounded-xl",
+      "group relative col-span-3 flex flex-col justify-between overflow-hidden rounded-xl border",
       // light styles
       "bg-background [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)]",
       // dark styles
@@ -57,20 +55,22 @@ const BentoCard = ({
   >
     <div>{background}</div>
     <div className="pointer-events-none z-10 flex transform-gpu flex-col gap-1 p-6 transition-all duration-300 group-hover:-translate-y-10 bg-base-200">
-      <Icon className="h-12 w-12 origin-left transform-gpu text-neutral-700 transition-all duration-300 ease-in-out group-hover:scale-75" />
-      <h3 className="text-xl font-semibold text-neutral-700 dark:text-neutral-300">
+      <h3 className="text-xl font-semibold">
         {name}
       </h3>
-      <p className="max-w-lg text-neutral-400">{description}</p>
+      <p className="max-w-lg">{description}</p>
+      {/* <a className="flex lg:hidden self-end justify-self-end border rounded-md px-2 py-1 bg-base-100 z-20" 
+        href={href} target="_blank" rel="noopener"> { cta }
+      </a> */}
     </div>
 
     <div
       className={cn(
-        "pointer-events-none absolute bottom-0 flex w-full translate-y-10 transform-gpu flex-row items-center p-4 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 bg-base-200 z-10",
+        "pointer-events-none absolute bottom-0 flex w-full translate-y-10 transform-gpu flex-row items-center p-4 transition-all duration-300 group-hover:translate-y-0 group-active:translate-y-0 group-hover:opacity-100 bg-base-200 z-10",
       )}
     >
       <Button variant="ghost" asChild size="sm" className="pointer-events-auto">
-        <a href={href}>
+        <a href={href} target="_blank" rel="noopener">
           {cta}
           <ArrowRightIcon className="ms-2 h-4 w-4 rtl:rotate-180" />
         </a>
