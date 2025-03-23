@@ -1,33 +1,61 @@
 "use client"
 
-import { Cat, Facebook, FileText, Github, Instagram, Linkedin, Twitter, Volume2, VolumeOff } from "lucide-react";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Cat, Facebook, FileText, Github, Instagram, Linkedin, Send, Twitter, Volume2, VolumeOff } from "lucide-react";
 import "swiper/css";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
+import { Particles } from "@/components/magicui/particles";
+import { BentoCard, BentoGrid } from "@/components/magicui/bento-grid";
+import { EducationData, ProjectsData } from "@/data/imp-data";
+import { Dock, DockIcon } from "@/components/magicui/dock";
+import { LinksData } from "@/data/links";
+
+export enum THEME {
+  LIGHT = "light",
+  DARK = "dark",
+  CUPCAKE = "cupcake",
+  BUMBLEBEE = "bumblebee",
+  EMERALD = "emerald",
+  CORPORATE = "corporate",
+  SYNTHWAVE = "synthwave",
+  RETRO = "retro",
+  CYBERPUNK = "cyberpunk",
+  VALENTINE = "valentine",
+  HALLOWEEN = "halloween",
+  GARDEN = "garden",
+  FOREST = "forest",
+  AQUA = "aqua",
+  LOFI = "lofi",
+  PASTEL = "pastel",
+  FANTASY = "fantasy",
+  WIREFRAME = "wireframe",
+  BLACK = "black",
+  LUXURY = "luxury",
+  DRACULA = "dracula",
+  CMYK = "cmyk",
+  AUTUMN = "autumn",
+  BUSINESS = "business",
+  ACID = "acid",
+  LEMONADE = "lemonade",
+  NIGHT = "night",
+  COFFEE = "coffee",
+  WINTER = "winter",
+  SILK = "silk",
+  SUNSET = "sunset",
+}
 
 export default function Home() {
 
   const router = useRouter();
   const routeToPage = (url: string) => { router.push(url) };
-  const theme = () => {
-    const theme = document.getElementsByTagName("body")[0];
-    if (theme.getAttribute("data-theme") === "lofi") {
-      theme.setAttribute("data-theme", "black");
-    } else {
-      theme.setAttribute("data-theme", "lofi");
-    }
-  }
+
+  const [theme, setTheme] = useState<THEME>(THEME.WINTER);
+  const themeChange = () => { theme === THEME.WINTER ? setTheme(THEME.SUNSET) : setTheme(THEME.WINTER) };
+
   const [currentYear] = useState(new Date().getFullYear());
-  const [projects, setProjects] = useState([
-    { project_name: "Spaces", project_img: "/projects/project-1.png", project_stack: "NEXT.js"},
-    { project_name: "Restaurant Demo", project_img: "/projects/project-2.png", project_stack: "PHP"},
-    { project_name: "Persona", project_img: "/projects/project-3.png", project_stack: "React.js"},
-    { project_name: "KBZPay Clone", project_img: "/projects/project-4.png", project_stack: "React.js"},
-  ]);
-  
+
   const audioRef = useRef(null);
   const [mute, setMute] = useState(false);
   const toggleMute = () => {
@@ -38,82 +66,37 @@ export default function Home() {
     }
   }
 
-  useEffect(()=> {
+  useEffect(() => {
     console.log(`mute = ${mute}`);
   }, [mute])
 
   return (
-    <div className="relative w-screen h-fit flex justify-center font-['DailyMoody'] overflow-y-scroll">
-      <div className="fixed left-1 bottom-2 w-1/4 h-fit hidden lg:hidden border border-secondary rounded-md">
-        <AudioPlayer
-          ref={audioRef}
-          loop
-          autoPlay
-          muted={mute}
-          src="/music/1-12. Dry Hands.mp3"
-          volume={0.3}
-          header="Now Playing : Mice on Venus"
-          showSkipControls={false}
-          showJumpControls={false}
-          onPlay={e => console.log("onPlay")}
-          style={{ backgroundColor: "transparent", border: "none"}} />
-      </div>
-      <div className="flex flex-col px-4 w-full md:w-1/2 lg:w-1/2">
-        <nav className="flex items-center w-full h-20 text-2xl box-border">
-          <div className="flex items-center gap-2">
-            <Cat />
+    <div className="relative w-screen h-fit flex justify-center pt-10 pb-24 font-['DailyMoody'] overflow-y-scroll" data-theme={theme}>
+      <div className="flex flex-col px-4 gap-6 w-full md:w-1/2 lg:w-1/2 z-10">
+        <nav className="flex items-center w-full h-20 p-4 text-2xl small-section">
+          <div className="w-full flex items-center justify-center lg:justify-start gap-2">
+            <Cat className="size-8" />
             <h1 className="font-['CuteNotes'] font-semibold text-3xl">Yion.dev</h1>
           </div>
         </nav>
-        <div className="flex flex-col w-full h-fit gap-2">
-          <div className="w-full h-fit flex items-center justify-end">
-            <label className="swap swap-rotate">
-              <input type="checkbox" onChange={theme} />
-
-              {/* sun icon */}
-              <svg
-                className="swap-off size-6 fill-current"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24">
-                <path
-                  d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z" />
-              </svg>
-
-              {/* moon icon */}
-              <svg
-                className="swap-on size-6 fill-current"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24">
-                <path
-                  d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
-              </svg>
-            </label>
-            <div className="divider divider-horizontal"></div>
-            <label className="swap text-xl">
-              <input type="checkbox" title="audio" onChange={toggleMute} />
-              <div className="swap-on"><VolumeOff /></div>
-              <div className="swap-off"><Volume2 /></div>
-            </label>
-          </div>
-          <div className="card card-side grow pt-4">
+        <div className="flex flex-col w-full h-fit p-4 gap-2 small-section">
+          <div className="card card-side grow">
             <figure className="size-32 rounded-md">
               <img src="/picture.jpg" alt="Yion" />
             </figure>
             <div className="card-body w-1/2 px-4 py-0">
               <div className="card-title">Hi, My name is Yion</div>
               <p className="text-xs lg:text-lg">Full-Stack Developer in Chiang Mai, building fast, responsive web apps with React, Next.js, and scalable backends.</p>
-              <div className="flex items-center justify-end">
-                <a onClick={()=>routeToPage("/resume")} title="resume" className="btn btn-ghost size-8 p-0 border"><FileText strokeWidth={1} /></a>
-                <a href="https://github.com/yion69" rel="noopener" target="_blank" title="github/yion69" className="btn btn-ghost size-8 p-0 border"><Github strokeWidth={1} /></a>
-                <a href="https://www.linkedin.com/in/thu-ta-naing-83b5222b0/" rel="noopener" target="_blank" title="linkedin/thu_ta_naing" className="btn btn-ghost size-8 p-0 border"><Linkedin strokeWidth={1} /></a>
+              <div className="hidden lg:flex items-center justify-end">
+                <a onClick={() => routeToPage("/resume")} title="resume" className="btn btn-ghost size-8 p-0 border"><FileText strokeWidth={1} /></a>
+                <a href={LinksData.Github.href} rel="noopener" target="_blank" title="github/yion69" className="btn btn-ghost size-8 p-0 border"><Github strokeWidth={1} /></a>
+                <a href={LinksData.Linkedin.href} rel="noopener" target="_blank" title="linkedin/thu_ta_naing" className="btn btn-ghost size-8 p-0 border"><Linkedin strokeWidth={1} /></a>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="divider"></div>
-
-        <div className="w-full h-fit flex flex-col">
+        <div className="w-full h-fit flex flex-col p-4 small-section">
           <div className="card w-full h-fit">
             <div className="card-body p-0 gap-2">
               <h3 className="card-title">What I Do</h3>
@@ -131,9 +114,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="divider"></div>
-
-        <div className="flex flex-col w-full h-fit gap-2">
+        <div className="flex flex-col w-full h-fit p-4 gap-2 small-section">
           <h3 className="text-xl font-semibold">Technologies</h3>
           <div className="card">
             <div className="card-body flex flex-col lg:flex-row lg:gap-24 h-fit p-0">
@@ -184,117 +165,61 @@ export default function Home() {
                   <span className="flex flex-col items-center justify-center box-border">
                     <svg viewBox="0 0 24 24" className="size-8 fill-base-content"><path d="M12.001,4.8c-3.2,0-5.2,1.6-6,4.8c1.2-1.6,2.6-2.2,4.2-1.8c0.913,0.228,1.565,0.89,2.288,1.624 C13.666,10.618,15.027,12,18.001,12c3.2,0,5.2-1.6,6-4.8c-1.2,1.6-2.6,2.2-4.2,1.8c-0.913-0.228-1.565-0.89-2.288-1.624 C16.337,6.182,14.976,4.8,12.001,4.8z M6.001,12c-3.2,0-5.2,1.6-6,4.8c1.2-1.6,2.6-2.2,4.2-1.8c0.913,0.228,1.565,0.89,2.288,1.624 c1.177,1.194,2.538,2.576,5.512,2.576c3.2,0,5.2-1.6,6-4.8c-1.2,1.6-2.6,2.2-4.2,1.8c-0.913-0.228-1.565-0.89-2.288-1.624 C10.337,13.382,8.976,12,6.001,12z" fill="currentColor"></path></svg>
                     Tailwind
-                  </span>  
+                  </span>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="divider"></div>
+        <div className="flex flex-col w-full h-fit p-4 gap-2 small-section">
+          <h3 className="text-xl font-semibold">Education</h3>
+          <ul className="list">
+            {
+              EducationData.map((item, index) => (
+                <li className="list-row px-0 lg:px-4" key={index}>
+                  <div>
+                    <img className="size-10 rounded-md" src={item.logo} alt={item.name} />
+                  </div>
+                  <div>
+                    <div>{item.name}</div>
+                    <div className="text-xs uppercase font-semibold opacity-60">{item.degree}</div>
+                  </div>
+                  <div className="flex">{item.date}</div>
+                </li>
+              ))
+            }
 
-        <div className="flex flex-col w-full h-fit gap-2">
-          <h3 className="text-xl font-semibold">Timeline</h3>
-          <ul className="timeline timeline-vertical">
-            <li>
-              <div className="timeline-start timeline-box text-sm w-full">
-                <h3 className="font-bold text-xs">Present</h3>
-                Applying for university
-              </div>
-              <hr />
-            </li>
-            <li>
-              <hr />
-              <div className="timeline-end timeline-box text-sm w-full">
-                <h3 className="font-bold text-xs">March, 2025</h3>
-                Acquired GED
-              </div>
-              <hr />
-            </li>
-            <li>
-              <hr />
-              <div className="timeline-start timeline-box text-sm w-full">
-                <h3 className="font-bold text-xs">February, 2025</h3>
-                Completed Higher Diploma in Infocomm Technology
-              </div>
-              <hr />
-            </li>
-            <li>
-              <hr />
-              <div className="timeline-end timeline-box text-sm w-full">
-                <h3 className="font-bold text-xs">March, 2024</h3>
-                Completed Foundation Year at British United College
-              </div>
-              <hr />
-            </li>
-            <li>
-              <hr />
-              <div className="timeline-start timeline-box text-sm w-full">
-                <h3 className="font-bold text-xs">March, 2021</h3>
-                Completed Year 11 at Yangon Adventist Seminary High School
-              </div>
-            </li>
           </ul>
         </div>
 
-        <div className="divider"></div>
-
-        <div className="flex flex-col w-full h-56 gap-2">
+        <div className="flex flex-col w-full h-fit p-4 gap-2 small-section">
           <h3 className="text-xl font-semibold">Projects</h3>
-          <Swiper
-            className="w-full grow"
-            spaceBetween={10}
-            slidesPerView={3}
-            breakpoints={{
-              0: {
-                slidesPerView: 1,
-              },
-              400:{
-                slidesPerView:1,
-              },
-              639: {
-                slidesPerView: 2,
-              },
-            }}
-            onSlideChange={() => console.log('slide change')}
-            onSwiper={(swiper: any) => console.log(swiper)}
-          >
-            {
-              projects.map((e,i) => (
-                <SwiperSlide className="flex flex-col w-full h-full border border-secondary rounded-md overflow-hidden">
-                  <div className="w-full h-3/4 bg-blue-400 overflow-hidden">
-                    <img
-                      src= {e.project_img}
-                      alt="Shoes" />
-                  </div>
-                  <div className="flex items-center justify-around w-full h-1/4 px-4 py-2 border-t border-secondary font-mono ">
-                    <h3 className=" p-0 w-full h-full">{e.project_name}</h3>
-                    <div className="flex w-fit h-full items-center grow gap-1 justify-end">
-                      <span className="badge badge-sm rounded-full bg-secondary text-secondary-content">{e.project_stack}</span>
-                    </div>
-                  </div>
-                </SwiperSlide>
-              ))
-            }
-          </Swiper>
+          <div className="w-full h-fit gap-0">
+            <BentoGrid className="grid grid-cols-1 lg:grid-cols-2 auto-rows-[22rem] lg:auto-rows-[22rem]">
+              {ProjectsData.map((project, index) => (
+                <BentoCard key={index} {...project} />
+              ))}
+            </BentoGrid>
+          </div>
         </div>
 
-        <div className="divider mb-0 pb-0"></div>
-
-        <div className="flex flex-col lg:flex-row w-full h-fit pt-2 pb-4">
+        <div className="flex flex-col lg:flex-row w-full h-fit p-4 small-section">
           <div className="flex justify-center lg:justify-start items-center w-full lg:w-1/2 h-fit">
             <h3 className="text-lg font-semibold">Socials •</h3>
             <ul className="grid grid-cols-4 gap-2">
               <li>
-                <a href="#" className="hover:translate-y-1"><Facebook size={22} strokeWidth={1} className="hover:-translate-y-1 transition-all hover:fill-accent" /></a>
-              </li>
-              <li>
-                <a href="#">
-                  <Instagram size={22} strokeWidth={1} className="hover:-translate-y-1 transition-all hover:fill-accent"/>
+                <a href={ LinksData.Facebook.href } target="_blank" rel="noopener">
+                  <Facebook size={22} strokeWidth={1} className="hover:-translate-y-1 transition-all hover:fill-accent" />
                 </a>
               </li>
               <li>
-                <a href="#">
+                <a href={ LinksData.Instagram.href } target="_blank" rel="noopener">
+                  <Instagram size={22} strokeWidth={1} className="hover:-translate-y-1 transition-all hover:fill-accent" />
+                </a>
+              </li>
+              <li>
+                <a href={ LinksData.Twitter.href } target="_blank" rel="noopener">
                   <Twitter size={22} strokeWidth={1} className="hover:-translate-y-1 transition-all hover:fill-accent" />
                 </a>
               </li>
@@ -304,6 +229,83 @@ export default function Home() {
             <p className="">&copy; <span>{currentYear}</span> Yion ‣ All rights reserved.</p>
           </div>
         </div>
+      </div>
+      <div className="hidden">
+        <AudioPlayer
+          ref={audioRef}
+          loop
+          autoPlay
+          muted={mute}
+          src="/music/1-12. Dry Hands.mp3"
+          layout="horizontal"
+          volume={0.05}
+          header="Now Playing : Mice on Venus"
+          showSkipControls={false}
+          showJumpControls={false}
+          onPlay={e => console.log("onPlay")}
+          style={{ backgroundColor: "transparent", border: "0px", boxShadow: "none" }} />
+      </div>
+      <Particles
+        className="absolute inset-0 z-0 overflow-hidden"
+        quantity={100}
+        ease={100}
+        size={2}
+        color={theme === THEME.WINTER ? "#40546f" : "#f8f8f3"}
+        refresh />
+      <div className="fixed bottom-8 z-20">
+        <Dock direction="middle" className="rounded-full h-10">
+          <DockIcon className="tooltip" data-tip="Contact Me">
+            <a href={LinksData.Email.href} target="_blank" rel="noopener" title="email">
+              <Send className="size-6" />
+            </a>
+          </DockIcon>
+          <DockIcon>
+            <a onClick={() => routeToPage("/resume")} title="resume" className="btn btn-ghost size-8 p-0 border">
+              <FileText className="size-6" />
+            </a>
+          </DockIcon>
+          <div className="divider divider-horizontal mx-0"></div>
+          <DockIcon>
+            <a href={LinksData.Github.href} target="_blank" rel="noopener" title="email">
+              <Github className="size-6" />
+            </a>
+          </DockIcon>
+          <DockIcon className="hidden lg:flex">
+            <a href={LinksData.Linkedin.href} target="_blank" rel="noopener" title="email">
+              <Linkedin className="size-6" />
+            </a>
+          </DockIcon>
+          <div className="divider divider-horizontal mx-0"></div>
+          <DockIcon>
+            <label className="swap text-xl">
+              <input type="checkbox" title="audio" onChange={toggleMute} />
+              <div className="swap-on"><VolumeOff /></div>
+              <div className="swap-off"><Volume2 /></div>
+            </label>
+          </DockIcon>
+          <DockIcon>
+            <label className="swap swap-rotate">
+              <input type="checkbox" onChange={themeChange} title="theme" />
+
+              <svg
+                className="swap-off size-6 fill-current"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24">
+                <path
+                  d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z" />
+              </svg>
+
+
+              <svg
+                className="swap-on size-6 fill-current"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24">
+                <path
+                  d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
+              </svg>
+            </label>
+          </DockIcon>
+        </Dock>
       </div>
     </div>
   );

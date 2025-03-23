@@ -7,7 +7,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning >
-      <body data-theme="lofi">
+      <body>
         {children}
       </body>
     </html>
