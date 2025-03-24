@@ -3,7 +3,7 @@ import { CalendarIcon, FileTextIcon, GlobeIcon, InputIcon } from "@radix-ui/reac
 export const ProjectsData = [
     {
         name: "Spaces",
-        description: "We automatically save your files as you type.",
+        description: "Website with tools like AI Chatbot, Text Editor, and more.",
         href: "https://github.com/yion69/Spaces",
         cta: "Learn more",
         background: <img src="/projects/project-1.png" className="absolute" title="project" />,
@@ -11,7 +11,7 @@ export const ProjectsData = [
     },
     {
         name: "Restaurant Demo Website",
-        description: "Search through all your files in one place.",
+        description: "A simaple restaurant website with menu page.",
         href: "https://github.com/yion69/restaurant-website-php ",
         cta: "Learn more",
         background: <img src="/projects/project-2.png" className="absolute" title="project" />,
@@ -19,7 +19,7 @@ export const ProjectsData = [
     },
     {
         name: "Persona",
-        description: "Supports 100+ languages and counting.",
+        description: "MBTI inspired landing page with colorful ui components.",
         href: "https://github.com/yion69/persona-website",
         cta: "Learn more",
         background: <img src="/projects/project-3.png" className="absolute" title="project" />,
@@ -27,7 +27,7 @@ export const ProjectsData = [
     },
     {
         name: "KBZPay Clone",
-        description: "Use the calendar to filter your files by date.",
+        description: "A clone of KBZPay app with UI components made from scratch.",
         href: "https://github.com/yion69/KBZPay_Clone",
         cta: "Learn more",
         background: <img src="/projects/project-4.png" className="absolute" title="project" />,

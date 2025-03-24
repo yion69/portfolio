@@ -1,8 +1,9 @@
-import { ArrowRightIcon } from "@radix-ui/react-icons";
+import { ArrowRightIcon, GitHubLogoIcon } from "@radix-ui/react-icons";
 import { ComponentPropsWithoutRef, ReactNode } from "react";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { Github } from "lucide-react";
 
 interface BentoGridProps extends ComponentPropsWithoutRef<"div"> {
   children: ReactNode;
@@ -53,20 +54,24 @@ const BentoCard = ({
     )}
     {...props}
   >
-    <div>{background}</div>
+    <div className="absolute lg:hidden right-4 bottom-2 z-20 size-fit">
+      <a href={href} target="_blank" rel="noopener" className=" underline flex gap-1 items-center justify-center">
+        <Github className="size-4" />Github
+      </a>
+    </div>
+    <div className="relative">
+      {background}
+    </div>
     <div className="pointer-events-none z-10 flex transform-gpu flex-col gap-1 p-6 transition-all duration-300 group-hover:-translate-y-10 bg-base-200">
       <h3 className="text-xl font-semibold">
         {name}
       </h3>
       <p className="max-w-lg">{description}</p>
-      {/* <a className="flex lg:hidden self-end justify-self-end border rounded-md px-2 py-1 bg-base-100 z-20" 
-        href={href} target="_blank" rel="noopener"> { cta }
-      </a> */}
     </div>
 
     <div
       className={cn(
-        "pointer-events-none absolute bottom-0 flex w-full translate-y-10 transform-gpu flex-row items-center p-4 transition-all duration-300 group-hover:translate-y-0 group-active:translate-y-0 group-hover:opacity-100 bg-base-200 z-10",
+        "pointer-events-none absolute bottom-0 flex w-full translate-y-10 transform-gpu flex-row items-center p-4 transition-all duration-300 group-hover:translate-y-0  group-hover:opacity-100 bg-base-200 z-10",
       )}
     >
       <Button variant="ghost" asChild size="sm" className="pointer-events-auto">
