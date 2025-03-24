@@ -2,10 +2,9 @@
 
 import { SquareChevronLeft } from "lucide-react";
 import { redirect, useSearchParams } from "next/navigation";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 
-export default function Resume() {
+export function ResumeContent () {
 
     const searchParam = useSearchParams();
     const theme = searchParam.get("theme");
@@ -27,4 +26,12 @@ export default function Resume() {
             </div>
         </div>
     )
+}
+
+export default function Resume () {
+    return(
+        <Suspense>
+            <ResumeContent />
+        </Suspense>
+    ) 
 }
