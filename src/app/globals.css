@@ -27,6 +27,16 @@
   src: url("/fonts/Daily Moody.otf");
 }
 
+@font-face {
+  font-family: "test";  
+  src: url("/fonts/Quicksand-VariableFont_wght.ttf");
+}
+
+@font-face {
+  font-family: "test2";  
+  src: url("/fonts/poppins.light.ttf");
+}
+
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
