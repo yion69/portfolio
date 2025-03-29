@@ -156,3 +156,7 @@
 .small-section {
   @apply border rounded-md bg-base-300;
 }
+
+html {
+  overflow-x: hidden;
+}
